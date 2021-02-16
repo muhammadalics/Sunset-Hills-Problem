@@ -11,13 +11,31 @@ function build_size(idval, size){
     let target_build = idval.slice(-2,idval.length);   
     console.log(target_build);
     console.log(document.getElementById(target_build).style.height);
-    document.getElementById(target_build).style.height = size * 50 + "px";
-    
+    // document.getElementById(target_build).style.height = size * 50 + "px";
+
+    el = document.getElementById(target_build);
+   
+    const myAnimation = anime({
+        targets: el,
+        easing: 'linear',
+        height: {
+            duration: 300,
+            value: size * 50 + "px"
+          }
+   });
+
+
     let arr = getBuildingHeights(buildings);
     console.log(arr);
     setBuildingColor(arr);
 
 }
+
+
+
+
+
+
 
 function getBuildingHeights(buildings){
     let arr = [];
@@ -36,11 +54,16 @@ function setBuildingColor(arr){
              max_height = arr[i];
              max_index = i;
              console.log("b"+ i);
-             document.getElementById("b"+ i).style.background = "yellow"
+            //  document.getElementById("b"+ i).style.background = "yellow"
+            var el =  document.getElementById("b"+ i);
+            animateColor(el, 'rgb(255,255,0)'); 
+             
              console.log(i);
          }
          else{
-            document.getElementById("b"+ i).style.background = "grey"
+            // document.getElementById("b"+ i).style.background = "grey"
+            var el =  document.getElementById("b"+ i);
+            animateColor(el, 'rgb(128,128,128)');
          }
 
 
@@ -48,4 +71,13 @@ function setBuildingColor(arr){
          console.log(max_height);
     }
 
+}
+
+function animateColor(target, color){
+    var changecolor = anime({
+        targets: target,
+        // endDelay: 200,
+        background: color,
+        easing: 'easeInQuad'
+    });
 }
