@@ -21,6 +21,7 @@
 
 <body>
 
+  
   <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha512-z4OUqw38qNLpn1libAN9BsoDx6nbNFio5lA6CuTp9NlK83b89hgyCVq+N5FdBJptINztxn1Z3SaKSKUS5UP60Q==" crossorigin="anonymous"></script>
 
   <!-- Navigation -->
@@ -61,10 +62,26 @@
           <li>Bootstrap 4.5.3</li>
           <li>jQuery 3.5.1</li>
 
-          <div class = "arrayarea">
+          <div class = "row1">
+            <div id="firstbuilding" class="square"></div>         
             <div class="square"></div>
-          
+            <div class="square"></div>
+            <div class="square"></div>
+            <div class="square"></div>
           </div>
+          
+          <div class = "row2">
+            <input type="number" min="1" max="9" step="1" value="1">
+            <input type="number" min="1" max="9" step="1" value="1">
+            <input type="number" min="1" max="9" step="1" value="1">
+            <input type="number" min="1" max="9" step="1" value="1">
+            <input type="number" min="1" max="9" step="1" value="1">
+
+          </div>
+          
+
+
+          
             <script>
               anime({
                 targets: '.square',
@@ -87,6 +104,7 @@
   <!-- Bootstrap core JavaScript -->
   <script src="vendor/jquery/jquery.slim.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="sunsethills.js"></script>
 
 </body>
 
