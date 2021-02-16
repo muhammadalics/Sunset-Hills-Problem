@@ -15,6 +15,7 @@
 
 .row{
   height: 300px;
+  flex-wrap: nowrap;
 }
 
 input {
@@ -23,3 +24,4 @@ input {
   margin-left: 5px;
   
 } 
+
