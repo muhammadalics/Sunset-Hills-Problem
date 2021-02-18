@@ -233,6 +233,72 @@ describe('Checking proper rendering of different elements', ()=>{
         }, 30000);
 
 
+    test('All buildings getting light', async () => {           
+
+        // HEIGHTS
+        // Building 0: 1
+        // Building 1: 2
+        // Building 2: 3
+        // Building 3: 4
+        // Building 4: 5
+    
+        let color_vals = [];
+        let target_buildings = {
+            'b0': '1',
+            'b1': '2',
+            'b2': '3',
+            'b3': '4',
+            'b4': '5'
+        };
+    
+
+        async function heightSetter(target_buildings){
+            
+            for (const key in target_buildings){
+                await driver.findElement(By.id('h_' + key)).clear(); //Clear the value of input element
+                await driver.findElement(By.id('h_' + key)).sendKeys(target_buildings[key], "\n"); // Enter 2 and then hit enter
+   
+            }
+            
+   
+        }
+
+        await heightSetter(target_buildings);
+
+        // await driver.findElement(By.id('h_' + target_building)).clear(); //Clear the value of input element
+        // await driver.findElement(By.id('h_' + target_building)).sendKeys("2", "\n"); // Enter 2 and then hit enter
+        
+        async function isYellow(element){
+            let color = await element.getCssValue("background-color");
+            if (color === 'rgba(255, 255, 0, 1)'){
+                return true
+            }
+            else{
+                // console.log('returning false');
+                return false
+            }
+        }
+      
+        await driver.wait(()=> isYellow(driver.findElement(By.id('b1'))),30000); //wait till isYellow returns true (because animation takes time to change color)
+        await driver.wait(()=> isYellow(driver.findElement(By.id('b2'))),30000); //wait till isYellow returns true (because animation takes time to change color)
+        await driver.wait(()=> isYellow(driver.findElement(By.id('b3'))),30000); //wait till isYellow returns true (because animation takes time to change color)
+        await driver.wait(()=> isYellow(driver.findElement(By.id('b4'))),30000); //wait till isYellow returns true (because animation takes time to change color)
+        
+
+
+        for (i=0; i<buildings.length; i++){
+            let c = await driver.findElement(By.id(buildings[i]));
+            let cval = await c.getCssValue("background-color"); // use await. getAttribute is WebElement class method
+            color_vals.push(cval);
+        }
+          
+        expect(color_vals).toStrictEqual([yellow, yellow, yellow, yellow, yellow])
+    
+        
+        }, 30000);
+
+
+
 });
 
 
