@@ -1,5 +1,6 @@
 const {Builder, By, Key, until, WebElement} = require('selenium-webdriver');
 const assert = require('assert');
+// var sleep = require('sleep');
 
 describe('Checking proper rendering of different elements', ()=>{
     let driver;
@@ -37,7 +38,7 @@ describe('Checking proper rendering of different elements', ()=>{
 
     test('Left-most building is yellow while all the rest are gray', async () => {           
 
-        console.log("this is colorrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr");      
+        //console.log("this is colorrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr");      
         var color = await driver.findElement(By.id('h_b0'));
         
         //This code was to check whether Selenium found the element or not
@@ -56,8 +57,8 @@ describe('Checking proper rendering of different elements', ()=>{
             
         console.log(color_vals);
 
-        var c = await driver.findElement(By.id('b0'));
-        var cval = await c.getCssValue("background-color"); // use await. getAttribute is WebElement class method
+        let c = await driver.findElement(By.id('b0'));
+        let cval = await c.getCssValue("background-color"); // use await. getAttribute is WebElement class method
 
         expect(cval).toBe("rgba(255, 255, 0, 1)");
         expect(color_vals).toStrictEqual([yellow, gray, gray, gray, gray])
@@ -65,6 +66,172 @@ describe('Checking proper rendering of different elements', ()=>{
         
       });
       
+
+    test('0th and 1st bulding getting light', async () => {           
+
+    // HEIGHTS
+    // Building 0: 1
+    // Building 1: 2
+    // Building 2: 1
+    // Building 3: 1
+    // Building 4: 1
+
+    let color_vals = [];
+    let target_building = 'b1';
+
+    await driver.findElement(By.id('h_' + target_building)).clear(); //Clear the value of input element
+    await driver.findElement(By.id('h_' + target_building)).sendKeys("2", "\n"); // Enter 2 and then hit enter
+    
+    async function isYellow(element){
+        let color = await element.getCssValue("background-color");
+        if (color === 'rgba(255, 255, 0, 1)'){
+            return true
+        }
+        else{
+            // console.log('returning false');
+            return false
+        }
+    }
+  
+    await driver.wait(()=> isYellow(driver.findElement(By.id(target_building))),30000); //wait till isYellow returns true (because animation takes time to change color)
+    
+    for (i=0; i<buildings.length; i++){
+        let c = await driver.findElement(By.id(buildings[i]));
+        let cval = await c.getCssValue("background-color"); // use await. getAttribute is WebElement class method
+        color_vals.push(cval);
+    }
+      
+    expect(color_vals).toStrictEqual([yellow, yellow, gray, gray, gray])
+
+    
+    }, 30000);
+
+
+
+
+    test('0th and 2nd bulding getting light', async () => {           
+
+        // HEIGHTS
+        // Building 0: 1
+        // Building 1: 1
+        // Building 2: 2
+        // Building 3: 1
+        // Building 4: 1
+    
+        let color_vals = [];
+        let target_building = 'b2';
+    
+        await driver.findElement(By.id('h_' + target_building)).clear(); //Clear the value of input element
+        await driver.findElement(By.id('h_' + target_building)).sendKeys("2", "\n"); // Enter 2 and then hit enter
+        
+        async function isYellow(element){
+            let color = await element.getCssValue("background-color");
+            if (color === 'rgba(255, 255, 0, 1)'){
+                return true
+            }
+            else{
+                // console.log('returning false');
+                return false
+            }
+        }
+      
+        await driver.wait(()=> isYellow(driver.findElement(By.id(target_building))),30000); //wait till isYellow returns true (because animation takes time to change color)
+        
+        for (i=0; i<buildings.length; i++){
+            let c = await driver.findElement(By.id(buildings[i]));
+            let cval = await c.getCssValue("background-color"); // use await. getAttribute is WebElement class method
+            color_vals.push(cval);
+        }
+          
+        expect(color_vals).toStrictEqual([yellow, gray, yellow, gray, gray])
+    
+        
+        }, 30000);
+
+
+
+
+
+    test('0th and 3rd bulding getting light', async () => {           
+
+        // HEIGHTS
+        // Building 0: 1
+        // Building 1: 1
+        // Building 2: 1
+        // Building 3: 2
+        // Building 4: 1
+    
+        let color_vals = [];
+        let target_building = 'b3';
+    
+        await driver.findElement(By.id('h_' + target_building)).clear(); //Clear the value of input element
+        await driver.findElement(By.id('h_' + target_building)).sendKeys("2", "\n"); // Enter 2 and then hit enter
+        
+        async function isYellow(element){
+            let color = await element.getCssValue("background-color");
+            if (color === 'rgba(255, 255, 0, 1)'){
+                return true
+            }
+            else{
+                // console.log('returning false');
+                return false
+            }
+        }
+      
+        await driver.wait(()=> isYellow(driver.findElement(By.id(target_building))),30000); //wait till isYellow returns true (because animation takes time to change color)
+        
+        for (i=0; i<buildings.length; i++){
+            let c = await driver.findElement(By.id(buildings[i]));
+            let cval = await c.getCssValue("background-color"); // use await. getAttribute is WebElement class method
+            color_vals.push(cval);
+        }
+          
+        expect(color_vals).toStrictEqual([yellow, gray, gray, yellow, gray])
+    
+        
+        }, 30000);
+
+
+
+    test('0th and 4th bulding getting light', async () => {           
+
+        // HEIGHTS
+        // Building 0: 1
+        // Building 1: 1
+        // Building 2: 1
+        // Building 3: 1
+        // Building 4: 2
+    
+        let color_vals = [];
+        let target_building = 'b4';
+    
+        await driver.findElement(By.id('h_' + target_building)).clear(); //Clear the value of input element
+        await driver.findElement(By.id('h_' + target_building)).sendKeys("2", "\n"); // Enter 2 and then hit enter
+        
+        async function isYellow(element){
+            let color = await element.getCssValue("background-color");
+            if (color === 'rgba(255, 255, 0, 1)'){
+                return true
+            }
+            else{
+                // console.log('returning false');
+                return false
+            }
+        }
+      
+        await driver.wait(()=> isYellow(driver.findElement(By.id(target_building))),30000); //wait till isYellow returns true (because animation takes time to change color)
+        
+        for (i=0; i<buildings.length; i++){
+            let c = await driver.findElement(By.id(buildings[i]));
+            let cval = await c.getCssValue("background-color"); // use await. getAttribute is WebElement class method
+            color_vals.push(cval);
+        }
+          
+        expect(color_vals).toStrictEqual([yellow, gray, gray, gray, yellow])
+    
+        
+        }, 30000);
+
 
 });
 
